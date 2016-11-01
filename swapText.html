@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+
+	<style type="text/css">
+		
+	.answers {
+		height: 100px;
+		width: 200px;
+		margin-bottom: 10px;
+	}
+
+	/*.content1 {
+		visibility: visible;
+	}
+
+	.content2 {
+		visibility: hidden;
+	}*/
+
+	</style>
+</head>
+<body>
+	
+<div class="content">
+		<div class="row">
+			<div class="col">
+				<div class="question" id="question">What is the University of Michigan's Mascot?</div>
+			</div>
+		</div>	
+		
+		<br>
+		
+		<div class="row">
+			<div class="col">
+
+				<div id="content1">
+
+					<div class="row">
+						<div class="col">
+							<button class="answers" id="ans1">Wolverine</button>
+						</div>
+					</div>	
+
+					<div class="row">
+						<div class="col">
+							<button class="answers" id="ans2">Badger</button>
+						</div>
+					</div>	
+
+				</div>
+
+				<div id="content2" style="display:none;">
+
+					<div class="row">
+						<div class="col">
+							<img class="logo" src="assets/images/wolverine.png">
+						</div>
+					</div>	
+
+				</div>
+
+			</div>
+		</div>	
+
+		
+
+
+</div>
+
+
+
+<!-- <div id="content1">
+    My Content 1
+</div>
+
+<div id="content2" style="display:none;">
+    My Dynamic Content
+</div>
+<button id="btnClick">Click me!</button> -->
+
+
+<script type="text/javascript">
+
+
+$('.answers').on('click',function(){
+    if($('#content1').css('display')!='none'){
+    $('#content2').show().siblings('div').hide();
+    }else if($('#content2').css('display')!='none'){
+        $('#content1').show().siblings('div').hide();
+    }
+});
+
+</script>
+
+</script>
+</body>
+</html>

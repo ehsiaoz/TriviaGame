@@ -79,7 +79,11 @@ body {
 }
 
 
-#answers {
+#content1 {
+	text-align: center;
+}
+
+#content2 {
 	text-align: center;
 }
 
