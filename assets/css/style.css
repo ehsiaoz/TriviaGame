@@ -60,7 +60,17 @@ body {
 
 } 
 
-				
+#answerResult {
+
+	height: 50px;
+	width: 100%;
+	text-align: center;
+	border: 2px solid green;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 50px
+}
+
 				
 #mainContent {
 

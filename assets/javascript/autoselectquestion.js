@@ -1,14 +1,43 @@
-var count = 5;
 
-var counter = setInterval(Timer, 1000);
 
-function Timer() {
-    count = count -1;
-    if (count <= 0) {
-    clearInterval(counter);
-    $("#timer").html("Time is up!");
-    return;
+
+
+setTimeout(switchContent, 3000);
+
+//swaps content in mainContent section between Q/A & Correct Answer
+var switchContent = function() {
+
+    if ($('#content1').css('display')!='none') {
+
+        $('#content2').show().siblings('div').hide();
     }
+
+    else if ($('#content2').css('display')!='none') {
+
+        $('#content1').show().siblings('div').hide();
+    }
+
+};
+
+
+
+var count = 5;
+$("#timer").html("Time remaining: " + count + " Seconds.");
+
+var counter = setInterval(timer, 1000);
+
+function timer() {
+    count = count -1;
+    if (count < 1) {
+
+        clearInterval(counter);
+        $("#answerResult").html("Out of Time!");
+        $("#revealAns").html("The correct answer is: " + michigan.correctAnswer);
+        switchContent();
+
+    //return;
+    }
+
     $("#timer").html("Time remaining: " + count + " Seconds.");
 }
 
@@ -47,11 +76,16 @@ stanford = createNewQA("What is the Stanford University's school mascot?", ["Tre
 
 questionList = [michigan, stanford];
 
-$("#question").html(questionList[0].question);
-$("#ans1").html(questionList[0].answers[0]);
-$("#ans2").html(questionList[0].answers[1]);
-$("#ans3").html(questionList[0].answers[2]);
-$("#ans4").html(questionList[0].answers[3]);
+var numQuestion = 0;
+
+var activeQuestion = questionList[numQuestion];
+
+$("#question").html(activeQuestion.question);
+$("#ans1").html(activeQuestion.answers[0]);
+$("#ans2").html(activeQuestion.answers[1]);
+$("#ans3").html(activeQuestion.answers[2]);
+$("#ans4").html(activeQuestion.answers[3]);
+
 
 
 
@@ -69,14 +103,20 @@ $("#ans4").html(questionList[0].answers[3]);
 
 // $("#startGame").on('click', game.startGame);
 
-$('.answerButton').on('click',function(){
+$('.answerButton').on('click',function() {
+    
+    var x = $(this).text();
+    console.log(x);
+    console.log(activeQuestion.correctAnswer);
+    //stop the timer count down
+    clearInterval(counter);
+    switchContent();
 
-
-
-    //replaces answer butttons with correct answer/image
-    if($('#content1').css('display')!='none'){
-    $('#content2').show().siblings('div').hide();
-    }else if($('#content2').css('display')!='none'){
-        $('#content1').show().siblings('div').hide();
+    if (x === activeQuestion.correctAnswer) {
+        $("#answerResult").html("Correct!");
     }
+
+    $("#answerResult").html("Wrong!");
+    $("#revealAns").html("The correct answer is: " + michigan.correctAnswer);
+
 });
