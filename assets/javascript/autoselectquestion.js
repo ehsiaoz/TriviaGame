@@ -106,17 +106,21 @@ $("#ans4").html(activeQuestion.answers[3]);
 $('.answerButton').on('click',function() {
     
     var x = $(this).text();
-    console.log(x);
-    console.log(activeQuestion.correctAnswer);
+    console.log(x.valueOf());
+    console.log(activeQuestion.correctAnswer.valueOf());
     //stop the timer count down
     clearInterval(counter);
     switchContent();
 
     if (x === activeQuestion.correctAnswer) {
+        console.log("this is x inside if statement: " + x);
         $("#answerResult").html("Correct!");
+        setTimeout(switchContent, 3000);
     }
 
-    $("#answerResult").html("Wrong!");
-    $("#revealAns").html("The correct answer is: " + michigan.correctAnswer);
-
+    else {
+        $("#answerResult").html("Wrong!");
+        $("#revealAns").html("The correct answer is: " + michigan.correctAnswer);
+        setTimeout(switchContent, 3000);
+    }
 });
