@@ -58,6 +58,7 @@ $("#ans4").html(questionList[0].answers[3]);
 
 
 // function selectQuestion() {
+    
 
 // var 
 
