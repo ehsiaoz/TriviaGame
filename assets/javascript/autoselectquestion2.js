@@ -1,7 +1,5 @@
 
 
-
-
 setTimeout(switchContent, 3000);
 
 //swaps content in mainContent section between Q/A & Correct Answer
@@ -10,11 +8,14 @@ var switchContent = function() {
     if ($('#content1').css('display')!='none') {
 
         $('#content2').show().siblings('div').hide();
+
     }
 
     else if ($('#content2').css('display')!='none') {
 
         $('#content1').show().siblings('div').hide();
+
+        
     }
 
 };
@@ -23,29 +24,8 @@ var switchContent = function() {
 
 
 
-var count = 5;
-$("#timer").html("Time remaining: " + count + " Seconds.");
-
-function timer() {
-    count = count -1;
-    if (count < 1) {
-
-        clearInterval(counter);
-        $("#answerResult").html("Out of Time!");
-        $("#revealAns").html("The correct answer is: " + michigan.correctAnswer);
-        switchContent();
-
-    //return;
-    }
-
-    $("#timer").html("Time remaining: " + count + " Seconds.");
-    return "dude";
-}
 
 
-
-//counter is a reference to where the setInterveral is placed in the browser
-var counter = setInterval(timer, 1000);
 
 
 
@@ -61,6 +41,9 @@ function createNewQA(question, answers, correctAnswer){
       }
     return QA;
 }
+
+michigan = createNewQA("What is the University of Michigan's school mascot?", ["Badger", "Wolverine", "Spartan", "Lion"], "Wolverine");
+stanford = createNewQA("What is the Stanford University's school mascot?", ["Tree", "Cardinal", "Book", "Bear"], "Tree");
 
 // function questionList() {
 // 	var questions = {}
@@ -78,12 +61,38 @@ function createNewQA(question, answers, correctAnswer){
 // };
 
 
+var timer = {
+    timeLeft:5,
+    interval: null,
+    reset: function(){
+        timer.timeLeft = 5;
+        $("#timer").html("Time remaining: " + timer.timeLeft + " Seconds.");
+    },
+    start: function(){
+        //if stopwatch.interval is null run
+        if(!timer.interval){
+         timer.interval = setInterval(timer.countDown, 1000);
+        }
+    },
+    stop: function(){
+        // DONE: Use clearInterval to stop the count here.
+        clearInterval(timer.interval);
+        //set stopwatch.interval back to null so that stopwatch.start can reset the counter
+        timer.interval = null;
+    },
+    countDown: function(){
+        timer.timeLeft--;
+        $("#timer").html("Time remaining: " + timer.timeLeft + " Seconds.");
+    },
 
-michigan = createNewQA("What is the University of Michigan's school mascot?", ["Badger", "Wolverine", "Spartan", "Lion"], "Wolverine");
-stanford = createNewQA("What is the Stanford University's school mascot?", ["Tree", "Cardinal", "Book", "Bear"], "Tree");
+};
 
+
+
+var counter;
 var game = {
 
+    count: 5,
     questionList: [michigan, stanford],
     activeQuestion: {},
     numQuestion: 0,
@@ -99,20 +108,65 @@ var game = {
         $("#ans3").html(activeQuestion.answers[2]);
         $("#ans4").html(activeQuestion.answers[3]);
     },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     restartCounter: function() {
-        count = game.maxCount;
+        game.count = game.maxCount;
     },
+
+    timer: function() {
+        game.count = game.count - 1;
+        if (game.count < 1) {
+
+            clearInterval(counter);
+            $("#answerResult").html("Out of Time!");
+            $("#revealAns").html("The correct answer is: " + activeQuestion.correctAnswer);
+            switchContent();
+            game.numQuestion++;
+            game.selectQuestion();
+            // game.restartCounter();
+            setTimeout(switchContent, 3000);
+
+
+        //return;
+        }
+
+        $("#timer").html("Time remaining: " + game.count + " Seconds.");
+        //return;
+    },
+
+    startCountdown: function() {
+        //counter is a reference to where the setInterveral is placed in the browser
+        counter = setInterval(game.timer, 1000);
+
+    }
+
 
 
 };
 
-
+$("#timer").html("Time remaining: " + game.count + " Seconds.");
 
 game.selectQuestion();
 
 //Buttons============================================
 
-// $("#startGame").on('click', game.startGame);
+$("#start").on('click', game.startCountdown);
 
 $('.answerButton').on('click',function() {
     
@@ -125,6 +179,7 @@ $('.answerButton').on('click',function() {
 
     if (x === activeQuestion.correctAnswer) {
         console.log("this is x inside if statement: " + x);
+        //notify user that they correctly answered the question
         $("#answerResult").html("Correct!");
 
         //increase numQuestion by one
@@ -132,19 +187,20 @@ $('.answerButton').on('click',function() {
         //log a correct guess
         game.correctGuesses++;
 
-        //select the next question in the questionList array populate the question and answer buttons
-        game.selectQuestion();
+        
+        
         console.log("This is numQuestion: " + game.numQuestion);
         console.log("This is correctGuesses: " + game.correctGuesses);
         console.log("This is the new activeQuestion: " + activeQuestion.question);
-        //switch the mainContent area from correct content back to the QA div
-        setTimeout(switchContent, 3000);
+        
         //reset the counter back to maxCount
-        count = game.maxCount;
-        console.log("This is the reset count: " + count);
+        game.restartCounter();
+        console.log("This is the reset count: " + game.count);
+        //start the timer again (hopefully from maxCount)
+        $("#timer").html("Time remaining: " + game.count + " Seconds.");
+        setTimout(startCountdown, 3000);
+        
         //Start the timer again
-
-
 
     }
 
@@ -155,4 +211,9 @@ $('.answerButton').on('click',function() {
         game.selectQuestion();
         setTimeout(switchContent, 3000);
     }
+
+    //select the next question in the questionList array populate the question and answer buttons
+    game.selectQuestion();
+    //switch the mainContent area from correct content back to the QA div
+    setTimeout(switchContent, 3000);
 });
