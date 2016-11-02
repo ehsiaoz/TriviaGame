@@ -39,18 +39,18 @@ var switchContent = function() {
 
 
 //Constructor function to create character objects
-function createNewQA(question, answers, correctAnswer){
+function createNewQA(question, answers, correctAnswer, imageUrl){
   var QA = {
         question: question, 
         answers: answers,
         correctAnswer: correctAnswer, 
-        //imageSrc: imageUrl,
+        imageSrc: imageUrl,
       }
     return QA;
 }
 
-michigan = createNewQA("What is the University of Michigan's school mascot?", ["Badger", "Wolverine", "Spartan", "Lion"], "Wolverine");
-stanford = createNewQA("What is the Stanford University's school mascot?", ["Tree", "Cardinal", "Book", "Bear"], "Tree");
+michigan = createNewQA("What is the University of Michigan's school mascot?", ["Badger", "Wolverine", "Spartan", "Lion"], "Wolverine", "assets/images/wolverine.png");
+stanford = createNewQA("What is the Stanford University's school mascot?", ["Tree", "Cardinal", "Book", "Bear"], "Tree", "assets/images/tree.png");
 
 // function questionList() {
 // 	var questions = {}
@@ -132,6 +132,7 @@ var game = {
         $("#ans2").html(activeQuestion.answers[1]);
         $("#ans3").html(activeQuestion.answers[2]);
         $("#ans4").html(activeQuestion.answers[3]);
+        $("#logo").attr('src', activeQuestion.imageSrc);
     },
 
 

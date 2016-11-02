@@ -119,3 +119,7 @@ ul {
 #buttonRow {
 	text-align: center;
 }
+
+#logo {
+	max-height: 250px;
+}
