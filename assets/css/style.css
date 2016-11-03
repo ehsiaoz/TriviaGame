@@ -5,6 +5,7 @@ html * {
 
 body {
 	margin: 0;
+	background-image: url("../images/college-logos.png");
 }
 
 .col {
@@ -16,22 +17,22 @@ body {
 }
 
 #background {
-	height: 600px;
+	height: 800px;
 	width: 100%;
 	/*background-color: #222657*/
-	border: 2px solid red;
+	
 	
 }
 	
 
 #wrapper {
-	height: 500px;
+	height: 600px;
 	width: 80%;
-	/*position: fixed;*/
-	top: 50px;
-	/*left: 10%;*/
-	background-color: yellow;
+	margin-top: 10%;
+	margin-left: 10%;
 	padding: 0px;
+	background-color: white;
+	border: 2px solid grey;
 
 }
 				
@@ -42,12 +43,15 @@ body {
 	width: 100%;
 	padding: 0px;
 	margin: 0px;
-	border: 2px solid brown;
+	background-color: #006699;
+	color: white;
 	text-align: center;
 }				
 
 #title {
-	line-height: 70px;
+	padding-top: 0px;
+	margin: 0px;
+	line-height: 100px;
 }
 						
 #timer {
@@ -55,10 +59,10 @@ body {
 	height: 50px;
 	width: 100%;
 	text-align: center;
-	border: 2px solid green;
 	font-size: 20px;
 	font-weight: bold;
-	line-height: 50px
+	line-height: 50px;
+	display: none;
 
 } 
 
@@ -67,7 +71,6 @@ body {
 	height: 50px;
 	width: 100%;
 	text-align: center;
-	border: 2px solid green;
 	font-size: 20px;
 	font-weight: bold;
 	line-height: 50px
@@ -75,7 +78,7 @@ body {
 
 				
 #mainContent {
-	visibility: hidden;
+	display: none;
 }
 
 #question {
@@ -83,7 +86,6 @@ body {
 	height: 50px;
 	width: 100%;
 	text-align: center;
-	border: 2px solid pink;
 	font-size: 20px;
 	font-weight: bold;
 	line-height: 50px
@@ -99,9 +101,6 @@ body {
 	text-align: center;
 }
 
-#answerList {
-
-}
 
 ul {
   list-style-type: none;
@@ -110,18 +109,41 @@ ul {
 .answerButton {
 	width: 250px;
 	height: 50px;
-	background-color: pink;
-	margin-bottom: 10px;
-	//on mouse over...
+	/*background-color: #ffff00;*/
+	margin-top: 10px;
+	border-radius: 10px;
 
-
+}
+.answerButton:hover { 
+	background-color: #0055ff !important; 
 }
 
 #start {
 	width: 250px;
 	height: 50px;
-	margin-top: 20px;
+	margin-top: 150px;
+	border-radius: 10px;
+	border-width: 2px;
+	border-color: white;
+	font-weight: bold;
 	
+}
+
+#start:hover { 
+	background-color: #ffff00 !important; 
+}
+
+#restart {
+	width: 250px;
+	height: 50px;
+	margin-top: 20px;
+	border-radius: 10px;
+	display: none;
+	
+}
+
+#restart:hover { 
+	background-color: #ffff00 !important; 
 }
 
 #buttonRow {
