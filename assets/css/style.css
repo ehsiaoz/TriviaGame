@@ -75,7 +75,7 @@ body {
 
 				
 #mainContent {
-
+	visibility: hidden;
 }
 
 #question {
@@ -111,9 +111,17 @@ ul {
 	width: 250px;
 	height: 50px;
 	background-color: pink;
+	margin-bottom: 10px;
 	//on mouse over...
 
 
+}
+
+#start {
+	width: 250px;
+	height: 50px;
+	margin-top: 20px;
+	
 }
 
 #buttonRow {
